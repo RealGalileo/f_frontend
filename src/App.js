@@ -7,6 +7,7 @@ import {Space, Table, Layout, Col} from "antd";
 import {Header, Footer, Content} from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 import Row from "antd/es/descriptions/Row";
+import {apiBaseUrl} from "./config";
 
 let datacloumns;
 datacloumns = [
@@ -53,7 +54,7 @@ datacloumns = [
 ];
 
 function req() {
-    return fetch('http://127.0.0.1:5000/show_all').then(res => {
+    return fetch(`${apiBaseUrl}/show_all`).then(res => {
         return res.json()
     })
 }
