@@ -15,17 +15,6 @@ import {apiBaseUrl} from "./config";
 
 const { RangePicker } = DatePicker;
 
-const routes = [
-    {
-        path: '/',
-        exact: true,
-        main: App,
-    },
-    {
-        path: '/suggestions',
-    }
-]
-
 const menuItems = [{
         label: '战绩查询',
         key: 'record',
