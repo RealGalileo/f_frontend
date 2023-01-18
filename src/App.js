@@ -1,6 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from "react";
+import {
+    createBrowserRouter, Router,
+    RouterProvider,
+} from "react-router-dom"
 import 'antd/dist/antd.css';
 import { ColumnsType } from 'antd/es/table';
 import {Space, Table, Layout, Col, Menu, DatePicker} from "antd";
@@ -10,6 +14,17 @@ import Row from "antd/es/descriptions/Row";
 import {apiBaseUrl} from "./config";
 
 const { RangePicker } = DatePicker;
+
+const routes = [
+    {
+        path: '/',
+        exact: true,
+        main: App,
+    },
+    {
+        path: '/suggestions',
+    }
+]
 
 const menuItems = [{
         label: '战绩查询',
@@ -158,7 +173,7 @@ function App() {
             <Layout>
                 <Content>
                     <div className="main-table">
-                        <div className="timepicker">
+                        <p className="timepicker">
                             通过日期筛选：
                             <RangePicker onChange={event => {
                                 if (event) {
@@ -177,7 +192,7 @@ function App() {
                                     setData(matchInfo_);
                                 }
                             }}/>
-                        </div>
+                        </p>
                         <Table columns={dataColumns} dataSource={data} rowKey={'id'} />
                     </div>
                     {/*<Row>*/}

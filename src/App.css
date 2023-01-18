@@ -5,6 +5,13 @@
 .timepicker{
     font-weight: bold;
     margin-bottom: 20px;
+    margin-right: 20px;
+    width: 400px;
+}
+
+.statistics{
+    width: 400px;
+    margin-right: 20px;
 }
 
 .ant-menu {
