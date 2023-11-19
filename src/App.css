@@ -14,11 +14,27 @@
     margin-right: 20px;
 }
 
-.ant-menu {
-    background-color: #1145CC !important;
+.input {
+    width: 600px;
+    margin: 0 auto;
+}
+
+.input-comment {
+    margin-top: 20px;
+}
+
+.align-left {
+    float: right;
+    margin-top: 20px;
 }
 
 #main-header {
     background-color: #1145CC;
     color: white;
+    font-size: 22px;
+}
+
+#global-footer {
+    color: darkgrey;
+    text-align: center;
 }

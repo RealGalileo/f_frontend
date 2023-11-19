@@ -12,22 +12,13 @@ import {Header, Footer, Content} from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 import Row from "antd/es/descriptions/Row";
 import {apiBaseUrl} from "./config";
+import Suggestions from './suggestions';
+import Statistics from './statistics';
+import Home from './home';
+import GlobalMenu from './globalMenu';
+import GlobalLayout from "./globalLayout";
 
 const { RangePicker } = DatePicker;
-
-const menuItems = [{
-        label: '战绩查询',
-        key: 'record',
-    },
-    {
-        label: '数据统计',
-        key: 'statistics'
-    },
-    {
-        label: '意见反馈',
-        key: 'comment'
-    },
-];
 
 function createDataColumns(filters) {
     return [
@@ -131,13 +122,18 @@ function App() {
     const [data, setData] = useState();
     const [loading, setLoading] = useState(false);
     const [dataColumns, setDataColumns] = useState(createDataColumns({}));
-    const [current, setCurrent] = useState('record');
     const [matchInfo_, setMatchInfo_] = useState();
     useEffect(() => {
         if(!loading && !data){
             setLoading(true);
             req().then(
                 (matchInfo) => {
+                    for (let i in matchInfo) {
+                        if (matchInfo[i].m_date_timestamp) {
+                            let showMatchDate = new Date(1000 * matchInfo[i].m_date_timestamp)
+                            matchInfo[i].m_date = showMatchDate.toLocaleDateString()
+                        }
+                    }
                     setData(matchInfo);
                     setMatchInfo_(matchInfo);
                     setDataColumns(createDataColumns({
@@ -154,45 +150,31 @@ function App() {
         }
     });
     return (
-        <Layout>
-            <Header id="main-header">
-                {/*<div>⭐️樊振东战绩查询系统⭐️</div>*/}
-                <Menu theme={'dark'} selectedKeys={[current]} mode={"horizontal"} items={menuItems}/>
-            </Header>
-            <Layout>
-                <Content>
-                    <div className="main-table">
-                        <p className="timepicker">
-                            通过日期筛选：
-                            <RangePicker onChange={event => {
-                                if (event) {
-                                    const start = event[0]['_d'];
-                                    const end = event[1]['_d'];
-                                    let newMatchInfo = [];
-                                    for (let i of matchInfo_) {
-                                        //console.log(i.m_date);
-                                        //console.log(dateRange.s);
-                                        if (i.m_date_timestamp != null && i.m_date_timestamp >= start.getTime()/1000 && i.m_date_timestamp <= end.getTime()/1000) {
-                                            newMatchInfo.push(i);
-                                        }
-                                    }
-                                    setData(newMatchInfo);
-                                } else {
-                                    setData(matchInfo_);
-                                }
-                            }}/>
-                        </p>
-                        <Table columns={dataColumns} dataSource={data} rowKey={'id'} />
-                    </div>
-                    {/*<Row>*/}
-                    {/*    <Col>*/}
-                    {/*        <Table columns={datacloumns} dataSource={data} />*/}
-                    {/*    </Col>*/}
-                    {/*</Row>*/}
-                </Content>
-            </Layout>
-            <Footer>foot</Footer>
-        </Layout>
+      <GlobalLayout>
+          <div className="main-table">
+              <p className="timepicker">
+                  通过日期筛选：
+                  <RangePicker onChange={event => {
+                      if (event) {
+                          const start = event[0]['_d'];
+                          const end = event[1]['_d'];
+                          let newMatchInfo = [];
+                          for (let i of matchInfo_) {
+                              //console.log(i.m_date);
+                              //console.log(dateRange.s);
+                              if (i.m_date_timestamp != null && i.m_date_timestamp >= start.getTime()/1000 && i.m_date_timestamp <= end.getTime()/1000) {
+                                  newMatchInfo.push(i);
+                              }
+                          }
+                          setData(newMatchInfo);
+                      } else {
+                          setData(matchInfo_);
+                      }
+                  }}/>
+              </p>
+              <Table columns={dataColumns} dataSource={data} rowKey={'id'} />
+          </div>
+      </GlobalLayout>
     );
 }
 
