@@ -27,8 +27,8 @@ function GlobalLayout(prop) {
                 <div style={{position: "sticky", top: minHeight + "px", zIndex: 10}}>
                     <GlobalMenu />
                 </div>
-                <Layout>
-                    <Content style={{width: "100vw"}}>
+                <Layout style={{width: "100vw", overflowX: "auto"}} id={"global-layout-content-container"}>
+                    <Content>
                         {prop.children}
                     </Content>
                 </Layout>

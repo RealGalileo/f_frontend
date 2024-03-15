@@ -22,3 +22,7 @@
     color: white;
     /*opacity: 0.8;*/
 }
+
+#global-layout-content-container .ant-table-tbody {
+    background-color: #ffffff;
+}
