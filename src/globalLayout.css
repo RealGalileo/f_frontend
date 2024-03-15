@@ -1,0 +1,24 @@
+.global-layout {
+    position: relative;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+.cover-container {
+    position: sticky;
+    top: 0;
+    width: 100vw;
+    z-index: 10;
+    background: transparent;
+    height: 100vh;
+}
+
+#cover-title {
+    position: absolute;
+    bottom: 8px;
+    margin-bottom: 0px;
+    right: 10px;
+    font-size: 28px;
+    color: white;
+    /*opacity: 0.8;*/
+}

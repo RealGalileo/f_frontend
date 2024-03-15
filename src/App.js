@@ -17,6 +17,7 @@ import Statistics from './statistics';
 import Home from './home';
 import GlobalMenu from './globalMenu';
 import GlobalLayout from "./globalLayout";
+import cover from "./cover.JPG";
 
 const { RangePicker } = DatePicker;
 
